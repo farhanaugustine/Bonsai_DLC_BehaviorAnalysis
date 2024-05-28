@@ -5,18 +5,18 @@
 ## This Python script analyzes mouse behavior data from a CSV file. The data includes whether a mouse’s body part is in various regions of interest (ROIs) and the x and y coordinates of the body part.
 
 # Metrics Calculated
-## The script calculates the following metrics for each ROI:
+## The script calculates the following Ten metrics for each ROI:
 
-- **Total Entries:** The total number of times the body part entered the ROI.
-- **Total Exits:** The total number of times the body part exited the ROI.
-- **Average Speed (Pixels/Frames):** The average speed of the body part when it’s in the ROI, calculated as the Euclidean distance between the current position and the previous position.
-- **Average Angle (Degrees):** The average angle of movement of the body part when it’s in the ROI, calculated as the angle between the vector formed by the current position and the previous position, and the positive x-axis.
-- **Total Immobility Frames (>10 frames):** The total number of frames where the body part was immobile (i.e., moved less than 2 pixels) for more than 10 consecutive frames.
-- **Time Spent in ROI (Frames):** The total number of frames that the body part spent in the ROI.
-- **Total Distance Traveled (Pixels):** The total distance traveled by the body part.
-- **Total Distance Traveled in ROI (Pixels):** The total distance traveled by the body part within the ROI.
-Number of Direction Changes: The total number of times the body part changed direction.
-- **Path Efficiency:** The ratio of the straight-line distance between the start and end points of the mouse’s path to the total distance traveled by the mouse.
+1. $\textcolor{yellow}{Total\ Entries\:}$ The total number of times the body part entered the ROI.
+2. $\textcolor{yellow}{Total\ Exits\:}$ The total number of times the body part exited the ROI.
+3. $\textcolor{yellow}{Average\ Speed\ (Pixels/Frames):}$ The average speed of the body part when it’s in the ROI, calculated as the Euclidean distance between the current position and the previous position.
+4. $\textcolor{yellow}{Average\ Angle\ (Degrees)\:}$ The average angle of movement of the body part when it’s in the ROI, calculated as the angle between the vector formed by the current position and the previous position, and the positive x-axis.
+5. $\textcolor{yellow}{Total\ Immobility\ Frames\ (>10 frames)\:}$ The total number of frames where the body part was immobile (i.e., moved less than 2 pixels) for more than 10 consecutive frames.
+6. $\textcolor{yellow}{Time\ Spent\ in\ ROI\ (Frames)\:}$ The total number of frames that the body part spent in the ROI.
+7. $\textcolor{yellow}{Total\ Distance\ Traveled\ (Pixels)\:}$ The total distance traveled by the body part.
+8. $\textcolor{yellow}{Total\ Distance\ Traveled\ in\ ROI\ (Pixels)\:}$ The total distance traveled by the body part within the ROI.
+9. $\textcolor{yellow}{Number\ of\ Direction\ Changes\:}$ The total number of times the body part changed direction.
+10. $\textcolor{yellow}{Path\ Efficiency\:}$ The ratio of the straight-line distance between the start and end points of the mouse’s path to the total distance traveled by the mouse.
 
 # Code Explanation
 - The script starts by importing the necessary libraries and loading the CSV file into a pandas DataFrame:
@@ -36,11 +36,11 @@ def calculate_angle(dx, dy):
     return np.degrees(np.arctan2(dy, dx))
 ```
 - The script then enters a loop that iterates over each ROI (from ‘Item1’ to ‘Item6’). For each ROI, it calculates the number of entries and exits, the average speed, the average angle, the total number of immobility frames, the time spent in the ROI, the total distance traveled, the total distance traveled within the ROI, the number of direction changes, and the path efficiency:
+
+#### $\textcolor{yellow}{Change\ the\ range\ to\ match\ your\ own\ dataset/ROI\ (i.e\.\,\ Item1\ ,\ Item2\ ,\ Item3\,\ .\ .\.)}$
 ```
-# For each ROI (Item1 to Item6).
-<font color="red"># Change the range to match your own dataset!</font>
-$\textcolor{red}{\textsf{Change the range to match your own dataset}}$
-for i in range(1, 7):
+# For each ROI (In my case Item1 -to- Item6 since I have 6 ROIs).
+for i in range(1, 7): # inclusive of 1 and exclusive of 7
     item = f'Item{i}'
 
     # Calculate Entries and Exits

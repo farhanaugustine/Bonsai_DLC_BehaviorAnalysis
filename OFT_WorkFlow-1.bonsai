@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WorkflowBuilder Version="2.8.1"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
+                 xmlns:p1="clr-namespace:OpenCV.Net;assembly=OpenCV.Net"
+                 xmlns:dlc="clr-namespace:Bonsai.DeepLabCut;assembly=Bonsai.DeepLabCut"
+                 xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
+                 xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
+                 xmlns="https://bonsai-rx.org/2018/workflow">
+  <Workflow>
+    <Nodes>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="cv:FileCapture">
+          <cv:FileName>C:\Users\Farha\Downloads\Yolov8_Segmentation\20230904_Mouse_196_OFT_720p_30fps_60sec.mp4</cv:FileName>
+          <cv:PlaybackRate>0</cv:PlaybackRate>
+          <cv:StartPosition>0</cv:StartPosition>
+          <cv:PositionUnits>Frames</cv:PositionUnits>
+          <cv:Loop>false</cv:Loop>
+          <cv:Playing>true</cv:Playing>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="ExternalizedMapping">
+        <Property Name="Value" DisplayName="TLC" />
+      </Expression>
+      <Expression xsi:type="PropertySource" TypeArguments="cv:Crop,p1:Rect">
+        <MemberName>RegionOfInterest</MemberName>
+        <Value>
+          <X>252</X>
+          <Y>149</Y>
+          <Width>100</Width>
+          <Height>100</Height>
+        </Value>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="dlc:PredictPose">
+          <dlc:ModelFileName>C:\Users\Farha\Downloads\Bonsai Tutorial\snapshot-500000.pb</dlc:ModelFileName>
+          <dlc:PoseConfigFileName>C:\Users\Farha\Downloads\Bonsai Tutorial\pose_cfg.yaml</dlc:PoseConfigFileName>
+          <dlc:MinConfidence>0.2</dlc:MinConfidence>
+          <dlc:ScaleFactor xsi:nil="true" />
+          <dlc:ColorConversion>Bgr2Rgb</dlc:ColorConversion>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="dlc:GetBodyPart">
+          <dlc:Name>Thorax</dlc:Name>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="MemberSelector">
+        <Selector>Position</Selector>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Zip" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="cv:ContainsPoint" />
+      </Expression>
+      <Expression xsi:type="ExternalizedMapping">
+        <Property Name="Value" DisplayName="BiggerCenter" />
+      </Expression>
+      <Expression xsi:type="PropertySource" TypeArguments="cv:Crop,p1:Rect">
+        <MemberName>RegionOfInterest</MemberName>
+        <Value>
+          <X>370</X>
+          <Y>250</Y>
+          <Width>450</Width>
+          <Height>300</Height>
+        </Value>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Zip" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="cv:ContainsPoint" />
+      </Expression>
+      <Expression xsi:type="ExternalizedMapping">
+        <Property Name="Value" DisplayName="BRC" />
+      </Expression>
+      <Expression xsi:type="PropertySource" TypeArguments="cv:Crop,p1:Rect">
+        <MemberName>RegionOfInterest</MemberName>
+        <Value>
+          <X>850</X>
+          <Y>550</Y>
+          <Width>100</Width>
+          <Height>100</Height>
+        </Value>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Zip" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="cv:ContainsPoint" />
+      </Expression>
+      <Expression xsi:type="ExternalizedMapping">
+        <Property Name="Value" DisplayName="BLC" />
+      </Expression>
+      <Expression xsi:type="PropertySource" TypeArguments="cv:Crop,p1:Rect">
+        <MemberName>RegionOfInterest</MemberName>
+        <Value>
+          <X>230</X>
+          <Y>550</Y>
+          <Width>100</Width>
+          <Height>100</Height>
+        </Value>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Zip" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="cv:ContainsPoint" />
+      </Expression>
+      <Expression xsi:type="ExternalizedMapping">
+        <Property Name="Value" DisplayName="Center 2" />
+      </Expression>
+      <Expression xsi:type="PropertySource" TypeArguments="cv:Crop,p1:Rect">
+        <MemberName>RegionOfInterest</MemberName>
+        <Value>
+          <X>520</X>
+          <Y>320</Y>
+          <Width>150</Width>
+          <Height>150</Height>
+        </Value>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Zip" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="cv:ContainsPoint" />
+      </Expression>
+      <Expression xsi:type="ExternalizedMapping">
+        <Property Name="Value" DisplayName="TRC" />
+      </Expression>
+      <Expression xsi:type="PropertySource" TypeArguments="cv:Crop,p1:Rect">
+        <MemberName>RegionOfInterest</MemberName>
+        <Value>
+          <X>830</X>
+          <Y>150</Y>
+          <Width>100</Width>
+          <Height>100</Height>
+        </Value>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Zip" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="cv:ContainsPoint" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Zip" />
+      </Expression>
+      <Expression xsi:type="io:CsvWriter">
+        <io:FileName>30FPS_Mouse 1_Control_OFT.csv</io:FileName>
+        <io:Append>false</io:Append>
+        <io:Overwrite>true</io:Overwrite>
+        <io:Suffix>None</io:Suffix>
+        <io:IncludeHeader>true</io:IncludeHeader>
+      </Expression>
+    </Nodes>
+    <Edges>
+      <Edge From="0" To="2" Label="Source1" />
+      <Edge From="0" To="3" Label="Source1" />
+      <Edge From="0" To="9" Label="Source1" />
+      <Edge From="0" To="13" Label="Source1" />
+      <Edge From="0" To="17" Label="Source1" />
+      <Edge From="0" To="21" Label="Source1" />
+      <Edge From="0" To="25" Label="Source1" />
+      <Edge From="1" To="2" Label="Source2" />
+      <Edge From="2" To="6" Label="Source1" />
+      <Edge From="3" To="4" Label="Source1" />
+      <Edge From="4" To="5" Label="Source1" />
+      <Edge From="5" To="6" Label="Source2" />
+      <Edge From="5" To="10" Label="Source1" />
+      <Edge From="5" To="14" Label="Source2" />
+      <Edge From="5" To="18" Label="Source2" />
+      <Edge From="5" To="22" Label="Source2" />
+      <Edge From="5" To="26" Label="Source2" />
+      <Edge From="5" To="28" Label="Source7" />
+      <Edge From="6" To="7" Label="Source1" />
+      <Edge From="7" To="28" Label="Source1" />
+      <Edge From="8" To="9" Label="Source2" />
+      <Edge From="9" To="10" Label="Source2" />
+      <Edge From="10" To="11" Label="Source1" />
+      <Edge From="11" To="28" Label="Source2" />
+      <Edge From="12" To="13" Label="Source2" />
+      <Edge From="13" To="14" Label="Source1" />
+      <Edge From="14" To="15" Label="Source1" />
+      <Edge From="15" To="28" Label="Source3" />
+      <Edge From="16" To="17" Label="Source2" />
+      <Edge From="17" To="18" Label="Source1" />
+      <Edge From="18" To="19" Label="Source1" />
+      <Edge From="19" To="28" Label="Source4" />
+      <Edge From="20" To="21" Label="Source2" />
+      <Edge From="21" To="22" Label="Source1" />
+      <Edge From="22" To="23" Label="Source1" />
+      <Edge From="23" To="28" Label="Source5" />
+      <Edge From="24" To="25" Label="Source2" />
+      <Edge From="25" To="26" Label="Source1" />
+      <Edge From="26" To="27" Label="Source1" />
+      <Edge From="27" To="28" Label="Source6" />
+      <Edge From="28" To="29" Label="Source1" />
+    </Edges>
+  </Workflow>
+</WorkflowBuilder>

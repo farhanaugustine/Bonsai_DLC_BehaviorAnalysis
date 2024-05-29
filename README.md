@@ -11,6 +11,8 @@
 2. $\textcolor{yellow}{Total\ Exits\:}$ The total number of times the body part exited the ROI.
 3. $\textcolor{yellow}{Average\ Speed\ (Pixels/Frames):}$ The average speed of the body part when it’s in the ROI, calculated as the Euclidean distance between the current position and the previous position.
 4. $\textcolor{yellow}{Average\ Angle\ (Degrees)\:}$ The average angle of movement of the body part when it’s in the ROI, calculated as the angle between the vector formed by the current position and the previous position, and the positive x-axis.
+     - ##### $\textcolor{green}{Note\: that\ this\ angle\ is\ measured\ counter-clockwise\ from\ the\ positive\ x-axis\,\ and\ it\ ranges\ from\ -180\ to\ +180\ degrees\.\}$ $\textcolor{green}{A\ positive\ angle\ represents\ a\ counter-clockwise\ rotation\, while\ a\ negative\ angle\ represents\ a\ clockwise\ rotation\.}$
+
 5. $\textcolor{yellow}{Total\ Immobility\ Frames\ (>10 frames)\:}$ The total number of frames where the body part was immobile (i.e., moved less than 2 pixels) for more than 10 consecutive frames.
 6. $\textcolor{yellow}{Time\ Spent\ in\ ROI\ (Frames)\:}$ The total number of frames that the body part spent in the ROI.
 7. $\textcolor{yellow}{Total\ Distance\ Traveled\ (Pixels)\:}$ The total distance traveled by the body part.
